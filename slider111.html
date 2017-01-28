@@ -1,0 +1,93 @@
+<head>
+
+<link rel="stylesheet" href="bootstrap.min.css">
+<link rel="stylesheet" href="nouislider.css">
+<script type="text/javascript" src="jquery-3.1.1.min.js"></script>
+ <script src="nouislider.js"></script>	
+</head>
+
+<div class="col-md-6">
+
+<p>	<span class="example-val" id="slider-margin-value-min"></span>
+			<span class="example-val" id="slider-margin-value-max"></span></p>
+			<div id="drag-fixed"></div>
+
+</div>
+
+
+<script>
+var dragFixedSlider = document.getElementById('drag-fixed');
+
+	var marginMin = document.getElementById('slider-margin-value-min'),
+	marginMax = document.getElementById('slider-margin-value-max');	
+    	
+noUiSlider.create(dragFixedSlider, {
+	start: [ 500, 1000 ],
+	behaviour: 'drag',
+	
+	connect: true,
+	range: {
+		'min': [ 500 ],
+		'10%': [ 0,  1 ],
+		'15%': [ 1500, 1],
+		'60%': [ 5500, 1 ],
+		'max': [ 10000 ]
+	}
+	
+});
+
+(function( $ ){
+
+dragFixedSlider.noUiSlider.on('update', function ( values, handle ) {
+
+	if ( handle ) {
+	    
+		marginMax.innerHTML = values[handle];
+		} else {
+		marginMin.innerHTML = values[handle];	
+	}
+	
+	var x = dragFixedSlider.noUiSlider.get([0, 1]);
+	
+	
+
+	if(x[1] < 1500){
+	dragFixedSlider.noUiSlider.set([x[1]-500,x[1]]);
+	}
+	
+	if(x[1] >= 1500 && x[1] < 5500){
+	dragFixedSlider.noUiSlider.set([x[1]-1000,x[1]]);
+	}
+	
+	if(x[1] >= 5500 && x[1] <= 10000){
+	dragFixedSlider.noUiSlider.set([x[1]-1500,x[1]]);
+	}
+	
+	
+	
+	
+	
+}
+);
+}
+
+)( jQuery );	
+
+
+</script>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
